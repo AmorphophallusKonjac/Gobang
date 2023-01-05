@@ -8,8 +8,7 @@ Auther:AmorphophallusKonjac(汪铭煜)
 char gamemode;
 
 int main() {
-	printf("hello");
-	//system("color F0");
+	system("color F0");
 	/*选择游戏模式*/
 	printf("请输入游戏模式：（0）人人对战；（1）人机对战; （2）机机对战\n");
 	gamemode = getchar();
@@ -23,5 +22,5 @@ int main() {
 	else
 		//pve();
 	system("pause");
-	return 0;
+	//return 0;
 }
