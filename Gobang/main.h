@@ -4,6 +4,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
+#define SHOW_CONSOLE
+#include <graphics.h>
 
 void pvp(); //人人对战
 //void pve(); //人机对战

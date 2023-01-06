@@ -8,6 +8,8 @@
 #include <time.h>
 #include <ctype.h>
 #include <string.h>
+#define SHOW_CONSOLE
+#include <graphics.h>
 
 //基本参数宏定义
 #define SIZE 15		//棋盘大小

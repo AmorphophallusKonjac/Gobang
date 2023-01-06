@@ -127,10 +127,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="common.c" />
-    <ClCompile Include="main.c" />
-    <ClCompile Include="mode.c" />
-    <ClCompile Include="play.c" />
+    <ClCompile Include="common.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="mode.cpp" />
+    <ClCompile Include="play.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="common.h" />
