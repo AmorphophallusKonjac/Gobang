@@ -10,7 +10,7 @@
 #define POS 180
 
 void menu(void);
-//int mserange(int x, int y);
-//int select_mode(void);
+int mserange(int x, int y);
+int select_mode(void);
 
 #endif // !_GRAPH_H_

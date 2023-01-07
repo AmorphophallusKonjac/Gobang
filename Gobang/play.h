@@ -6,7 +6,7 @@
 #define LASTBLACK 3
 #define LASTWHITE 4
 
-extern char gamemode;
+extern int gamemode;
 
 void innerLayoutToDisplayArray(void);
 void displayBoard(void);

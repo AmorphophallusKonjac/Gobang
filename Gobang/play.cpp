@@ -66,9 +66,9 @@ void innerLayoutToDisplayArray(void) {
 void displayBoard(void) {
     //第一步：标题
     printf("         ");
-    if (gamemode == '0')
+    if (gamemode == 1)
         printf("五子棋人人对战\n");
-    else if (gamemode == '1')
+    else if (gamemode == 2)
         printf("五子棋人机对战\n");
     else
         printf("五子棋机机对战\n");
@@ -110,8 +110,6 @@ void getinput() {
     int correct_input = 0;
     char temp_y;
     do {
-        while (getchar() != '\n')
-            ;   //清空输入流
         scanf("\n%c%d", &temp_y, &g_x);  //\n吸收残留的回车符 下同
 
         while ((!inrange(g_x - 1, temp_y - 'a') && !inrange(g_x - 1, temp_y - 'A'))) {
