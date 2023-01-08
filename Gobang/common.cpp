@@ -1,5 +1,7 @@
 #include"common.h"
 
+node h[300];
+
 //ÅÐ¶ÏÊÇ·ñ³ö½ç
 int inrange(int x, int y) {
 	if (0 <= x && x < SIZE && 0 <= y && y < SIZE)

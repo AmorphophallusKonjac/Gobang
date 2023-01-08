@@ -8,7 +8,7 @@
 #include <time.h>
 #include <ctype.h>
 #include <string.h>
-#define SHOW_CONSOLE
+//#define SHOW_CONSOLE
 #include <graphics.h>
 
 //基本参数宏定义
@@ -19,15 +19,13 @@
 #define WHITE 2
 
 //全局变量
+struct node {
+	int x, y;
+};
+extern int cnt;
 extern int g_x;
 extern int g_y; //下棋位置
 extern int player; //下棋人
-extern char arrayForEmptyBoard[SIZE][SIZE * CHARSIZE + 1]; //初始化空棋盘
-extern char arrayForDisplayBoard[SIZE][SIZE * CHARSIZE + 1]; //此数组存储用于显示的棋盘 
-extern char play1Pic[];//黑棋子;
-extern char play1CurrentPic[];
-extern char play2Pic[];//白棋子;
-extern char play2CurrentPic[];
 extern int arrayForInnerBoardLayout[SIZE][SIZE];
 
 //函数申明

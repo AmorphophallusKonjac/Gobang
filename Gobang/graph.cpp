@@ -3,12 +3,13 @@
 
 //打印图形界面窗口
 void menu() {
-	initgraph(640, 480);
-	setbkcolor(EGERGB(0x17, 0x8C, 0xA4));
+	initgraph(640, 560);
+	setbkcolor(EGERGB(0xd1, 0xb6, 0x9a));
 	setfillcolor(EGERGB(0xF9, 0xF7, 0xF0)); 
 	bar(220, POS, 220 + WIDTH, POS + HEIGHT); //人人对战
 	bar(220, POS + GAP, 220 + WIDTH, POS + GAP + HEIGHT); //人机对战
 	bar(220, POS + 2 * GAP, 220 + WIDTH, POS + 2 * GAP + HEIGHT); //机机对战
+	bar(220, POS + 3 * GAP, 220 + WIDTH, POS + 3 * GAP + HEIGHT); //对局复盘
 	
 	setcolor(EGERGB(0x07, 0x2A, 0x40));
 	setfont(20, 0, "黑体");
@@ -16,6 +17,7 @@ void menu() {
 	outtextxy(280, POS + 15, "人人对战");
 	outtextxy(280, POS + GAP + 15, "人机对战");
 	outtextxy(280, POS + 2 * GAP + 15, "机机对战");
+	outtextxy(280, POS + 3 * GAP + 15, "对局复盘");
 	setfont(40, 0, "黑体");
 	outtextxy(222, POS - 110, "五子棋游戏");
 	setfont(15, 0, "黑体");
@@ -31,6 +33,8 @@ int mserange(int x, int y) {
 			return 2;
 		else if (POS + 2 * GAP <= y && y <= POS + 2 * GAP + HEIGHT)
 			return 3;
+		else if (POS + 3 * GAP <= y && y <= POS + 3 * GAP + HEIGHT)
+			return 4;
 	return 0;
 }
 
@@ -42,6 +46,7 @@ int select_mode() {
 			msg = getmouse();
 		}
 		if (msg.is_down() && mserange(msg.x, msg.y)) {
+			cleardevice();
 			return mserange(msg.x, msg.y);
 		}
 	}

@@ -5,5 +5,8 @@
 #include"play.h"
 
 void pvp();
+void pve();
+void eve();
+void rew();
 
 #endif // !_MODE_H_

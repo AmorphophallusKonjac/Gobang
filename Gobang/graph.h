@@ -1,7 +1,7 @@
 #ifndef _GRAPH_H_
 #define _GRAPH_H_
 
-#define SHOW_CONSOLE
+//#define SHOW_CONSOLE
 #include <graphics.h>
 
 #define WIDTH 200

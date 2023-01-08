@@ -5,11 +5,19 @@
 
 #define LASTBLACK 3
 #define LASTWHITE 4
+#define RATIO 13
+#define BASEY 96
+#define BASEX 50
+#define GAP 32
 
 extern int gamemode;
 
-void innerLayoutToDisplayArray(void);
-void displayBoard(void);
+void loadrew(void);
+void saverew(void);
+void askrew(void);
+void drawui(void);
+void drawchess(int x, int y, int k);
+void drawboard();
 void initRecordBoard(void);
 void display(void);
 int win(int x, int y);
