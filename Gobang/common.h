@@ -22,6 +22,7 @@
 struct node {
 	int x, y;
 };
+extern int hcnt;
 extern int cnt;
 extern int g_x;
 extern int g_y; //ÏÂÆåÎ»ÖÃ

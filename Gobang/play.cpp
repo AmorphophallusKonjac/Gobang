@@ -14,13 +14,13 @@ void drawui() {
     setfont(15, 0, "黑体");
     settextjustify(LEFT_TEXT, TOP_TEXT);
     if (gamemode == 1)
-        outtextxy(0, 0, "Author: AmorphophallusKonjac（汪铭煜）五子棋人人对战");
+        outtextxy(0, 0, "五子棋人人对战");
     else if (gamemode == 2)
-        outtextxy(0, 0, "Author: AmorphophallusKonjac（汪铭煜）五子棋人机对战");
+        outtextxy(0, 0, "五子棋人机对战");
     else if (gamemode == 3)
-        outtextxy(0, 0, "Author: AmorphophallusKonjac（汪铭煜）五子棋机机对战");
+        outtextxy(0, 0, "五子棋机机对战");
     else
-        outtextxy(0, 0, "Author: AmorphophallusKonjac（汪铭煜）五子棋对局复盘");
+        outtextxy(0, 0, "五子棋对局复盘 按左右方向键控制棋谱，esc键退出。");
 }
 
 //画出棋子
@@ -135,12 +135,23 @@ void judge(int result) {
     setcolor(EGERGB(0x07, 0x2A, 0x40));
     setfont(15, 0, "黑体");
     settextjustify(LEFT_TEXT, TOP_TEXT);
-    if (result == WHITE)
-        xyprintf(0, 540, "白棋赢。是否保存对局棋谱（y/n）");
-    else if (result == BLACK)
-        xyprintf(0, 540, "黑棋赢。是否保存对局棋谱（y/n）");
-    else
-        xyprintf(0, 540, "平局。是否保存对局棋谱（y/n）");
+    if (gamemode != 4) {
+        if (result == WHITE)
+            xyprintf(0, 540, "白棋赢。是否保存对局棋谱（y/n）");
+        else if (result == BLACK)
+            xyprintf(0, 540, "黑棋赢。是否保存对局棋谱（y/n）");
+        else
+            xyprintf(0, 540, "平局。是否保存对局棋谱（y/n）");
+    }
+    else {
+        if (result == WHITE)
+            xyprintf(0, 540, "白棋赢。");
+        else if (result == BLACK)
+            xyprintf(0, 540, "黑棋赢。");
+        else
+            xyprintf(0, 540, "平局。");
+    }
+
 }
 
 //询问是否复盘与存储路径
@@ -175,5 +186,33 @@ void loadrew() {
     inputbox_getline("请输入载入棋谱文件名（不含后缀）", "请输入棋谱文件名", str, 100);
     strcat(str, st);
     fp = fopen(str, "r");
-    while (fscanf(fp, "%d, %d\n", &h[cnt].x, &h[cnt].y)) ++cnt;
+    while (fscanf(fp, "%d, %d\n", &h[cnt].x, &h[cnt].y) != EOF) ++cnt;
+    hcnt = cnt;
+    cnt = 0;
+    fclose(fp);
+}
+
+//读取复盘模式的指令
+int getcmd() {
+    int k = 0;
+    for (; (k != key_esc && k != key_left && k != key_right) || (k == key_left && !cnt) || (k == key_right && cnt >= hcnt); ) {
+        k = getch();
+    }
+    return k;
+}
+
+//处理复盘模式的指令
+int setcmd() {
+    int k = 0;
+    if ((k = getcmd()) == key_esc) return 0;
+    if (k == key_left && cnt) {
+        --cnt; g_x = h[cnt - 1].x; g_y = h[cnt - 1].y;
+        arrayForInnerBoardLayout[h[cnt].x][h[cnt].y] = ENPTY;
+        return 1;
+    }
+    if (k == key_right && cnt < hcnt) {
+        g_x = h[cnt].x; g_y = h[cnt].y; ++cnt;
+        arrayForInnerBoardLayout[g_x][g_y] = player;
+        return 1;
+    }
 }

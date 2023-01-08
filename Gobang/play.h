@@ -9,9 +9,13 @@
 #define BASEY 96
 #define BASEX 50
 #define GAP 32
+#define key_left 293
+#define key_right 295
 
 extern int gamemode;
 
+int getcmd();
+int setcmd();
 void loadrew(void);
 void saverew(void);
 void askrew(void);
