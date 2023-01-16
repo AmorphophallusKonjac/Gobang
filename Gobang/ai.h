@@ -8,7 +8,7 @@ struct Tree {
 	int x, y, score;
 };
 const int inf = 2e6;
-const int mdep = 6;
+const int mdep = 6;  //最大搜索深度
 void ai_op(void);
 void bitset(int, int, int);
 void bitdel(int, int, int);

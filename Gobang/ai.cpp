@@ -4,6 +4,7 @@ int board[SIZE][SIZE];
 int cpbitboard[4][31];
 int boardscore;
 
+//ai计算落子信息
 void ai_op() {
 	for (int i = 0; i < SIZE; ++i)
 		for (int j = 0; j < SIZE; ++j)
@@ -18,6 +19,7 @@ void ai_op() {
 	g_x = val.x; g_y = val.y;
 }
 
+// 搜索时落子
 void bitset(int x, int y, int role) {
 	int bitrole = airole - 1;
 	board[x][y] = role;
@@ -35,6 +37,7 @@ void bitset(int x, int y, int role) {
 	boardscore += v[bitrole][bitlen[3][rightx(x, y)]][cpbitboard[3][rightx(x, y)]] - v[bitrole ^ 1][bitlen[3][rightx(x, y)]][cpbitboard[3][rightx(x, y)]];
 }
 
+// 搜索时取消落子
 void bitdel(int x, int y, int role) {
 	int bitrole = airole - 1;
 	board[x][y] = 0;
@@ -110,6 +113,8 @@ int gen(Tree f[], int role) {
 	return cnt;
 }
 
+
+//pvs搜索
 struct Tree dfs(int dep, Tree alp, Tree bet, int role) {
 	Tree val, f[225];
 	int cnt;
@@ -117,7 +122,7 @@ struct Tree dfs(int dep, Tree alp, Tree bet, int role) {
 		val.score = boardscore;
 		return val;
 	}
-	cnt = min(gen(f, role), 20);
+	cnt = min(gen(f, role), 20); //最多20个分支
 	if (role == airole) {
 		for (int i = 0; i < cnt; ++i) {
 			if (alp.score != -inf) {

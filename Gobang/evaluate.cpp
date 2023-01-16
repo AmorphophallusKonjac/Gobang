@@ -4,6 +4,7 @@ int v[2][SIZE + 1][14348907] = { 0 };
 const int pp[] = { 1, 10, 100, 2200, 10000, 100000 };
 extern int cpbitboard[4][31];
 
+//计算单个点的落子得分
 int calc_point(int x, int y, int role) {
 	bitset(x, y, role + 1);
 	int val1 = v[role][15][cpbitboard[0][x]] + v[role][15][cpbitboard[1][y]] + v[role][bitlen[2][leftx(x, y)]][cpbitboard[2][leftx(x, y)]] + v[role][bitlen[3][rightx(x, y)]][cpbitboard[3][rightx(x, y)]];
@@ -15,11 +16,13 @@ int calc_point(int x, int y, int role) {
 	return (val1 - val2) - (val3 - val4);
 }
 
+//初始化得分函数
 void set_score() {
 	init_score_5();
 	init_score();
 }
 
+//初始化长度为6-15的行的得分
 void init_score() {
 	for (int len = 6; len <= SIZE; ++len) {
 		for (int i = 0; i < pow(3, len); ++i) {
@@ -193,6 +196,7 @@ void init_score() {
 	}
 }
 
+//初始化长度为5的行的得分
 void init_score_5() {
 	for (int i = 0; i < 243; i++) {
 		switch (i) {
