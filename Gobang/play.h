@@ -14,8 +14,8 @@
 
 extern int gamemode;
 
-int getcmd();
-int setcmd();
+int getcmd(void);
+int setcmd(void);
 void loadrew(void);
 void saverew(void);
 void askrew(void);
@@ -25,11 +25,14 @@ void drawboard();
 void initRecordBoard(void);
 void display(void);
 int win(int x, int y);
-void getinput(void);
+int getinput(void);
 void setinput(void);
+void delinput(void);
 void printpos(void);
 void pass(void);
 int cntconnect(int x, int y, int dx, int dy);
 void judge(int result);
+void initbitboard(void);
+int askblack(void);
 
 #endif // !_PLAY_H_

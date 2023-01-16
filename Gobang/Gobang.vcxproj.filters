@@ -30,6 +30,12 @@
     <ClCompile Include="graph.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="evaluate.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ai.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -45,6 +51,12 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="graph.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="evaluate.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ai.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

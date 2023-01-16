@@ -2,6 +2,8 @@
 
 int arrayForInnerBoardLayout[SIZE][SIZE];
 extern struct node h[300];
+int bitboard[4][31];
+int bitlen[4][31];
 
 //初始化一个空棋盘格局 
 void initRecordBoard() {
@@ -21,6 +23,12 @@ void drawui() {
         outtextxy(0, 0, "五子棋机机对战");
     else
         outtextxy(0, 0, "五子棋对局复盘 按左右方向键控制棋谱，esc键退出。");
+    setfillcolor(EGERGB(0xF9, 0xF7, 0xF0));
+    bar(515 - 20, 530 - 10, 515 + 20, 530 + 10);
+    setfont(14, 0, "黑体");
+    setcolor(EGERGB(0x07, 0x2A, 0x40));
+    settextjustify(CENTER_TEXT, CENTER_TEXT);
+    xyprintf(515, 530, "悔棋");
 }
 
 //画出棋子
@@ -79,26 +87,42 @@ int cntconnect(int x, int y, int dx, int dy) {
 }
 
 //获取输入坐标
-void getinput() {
+int getinput() {
     mouse_msg msg = { 0 };
     for (; is_run(); delay_fps(60)) {
         while (mousemsg()) {
             msg = getmouse();
         }
+        if (msg.is_down() && 495 <= msg.x && msg.x <= 535 && 520 <= msg.y && msg.y <= 540 && cnt >= 2) {
+            return 1;
+        }
         if (msg.is_down() && msg.y >= BASEX - GAP / 2 && msg.x >= BASEY - GAP / 2) {
             g_x = (msg.y - (BASEX - GAP / 2)) / GAP;
             g_y = (msg.x - (BASEY - GAP / 2)) / GAP;
             if (inrange(g_x, g_y) && !arrayForInnerBoardLayout[g_x][g_y])
-                return;
+                return 0;
         }
     }
 }
 
 //读入并处理坐标
 void setinput() {
-    getinput();
     arrayForInnerBoardLayout[g_x][g_y] = player;
+    bitboard[0][g_x] += player * pow(3, g_y);
+    bitboard[1][g_y] += player * pow(3, g_x);
+    bitboard[2][leftx(g_x, g_y)] += player * pow(3, lefty(g_x, g_y));
+    bitboard[3][rightx(g_x, g_y)] += player * pow(3, righty(g_x, g_y));
     h[cnt].x = g_x; h[cnt].y = g_y; ++cnt;
+}
+
+//悔棋时更新信息
+void delinput() {
+    --cnt; g_x = h[cnt].x; g_y = h[cnt].y;
+    arrayForInnerBoardLayout[g_x][g_y] = 0;
+    bitboard[0][g_x] -= player * pow(3, g_y);
+    bitboard[1][g_y] -= player * pow(3, g_x);
+    bitboard[2][leftx(g_x, g_y)] -= player * pow(3, lefty(g_x, g_y));
+    bitboard[3][rightx(g_x, g_y)] -= player * pow(3, righty(g_x, g_y));
 }
 
 //输出落子信息
@@ -215,4 +239,25 @@ int setcmd() {
         arrayForInnerBoardLayout[g_x][g_y] = player;
         return 1;
     }
+}
+
+void initbitboard() {
+    for (int i = 0; i < 4; ++i)
+        for (int j = 0; j < 31; ++j)
+            bitboard[i][j] = 0;
+    for (int i = 0; i < 2; ++i)
+        for (int j = 0; j < 31; ++j)
+            bitlen[i][j] = 15;
+    for (int i = 0; i < 29; ++i) {
+        bitlen[2][i] = (i < 15) ? i + 1 : 29 - i;
+        bitlen[3][i] = (i < 15) ? i + 1 : 29 - i;
+    }
+}
+
+int askblack() {
+    char str[100];
+    inputbox_getline("你想选黑棋吗？（y/n）", "", str, 100);
+    if (str[0] == 'y')
+        return 1;
+    return 2;
 }

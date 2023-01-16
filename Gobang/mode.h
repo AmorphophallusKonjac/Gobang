@@ -3,6 +3,8 @@
 
 #include"common.h"
 #include"play.h"
+#include"ai.h"
+#include"evaluate.h"
 
 void pvp();
 void pve();

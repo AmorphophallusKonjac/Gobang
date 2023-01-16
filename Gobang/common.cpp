@@ -17,3 +17,19 @@ int isfull() {
 				return 0;
 	return 1;
 }
+
+int leftx(int x, int y) {
+	return x + y;
+}
+
+int lefty(int x, int y) {
+	return (x + y < SIZE) ? x : (SIZE - 1 - y);
+}
+
+int rightx(int x, int y) {
+	return y - x + SIZE - 1;
+}
+
+int righty(int x, int y) {
+	return (y <= x) ? y : x;
+}
