@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
-#define SHOW_CONSOLE
+//#define SHOW_CONSOLE
 #include <graphics.h>
 
 int select_mode();

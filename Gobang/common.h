@@ -10,7 +10,7 @@
 #include <string.h>
 #include <algorithm>
 #include <iostream>
-#define SHOW_CONSOLE
+//#define SHOW_CONSOLE
 #include <graphics.h>
 
 //基本参数宏定义
